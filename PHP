@@ -1,0 +1,30 @@
+<?php
+
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'http://210.211.108.18:8081/gachthe/gach-the',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'POST',
+  CURLOPT_POSTFIELDS =>'{
+ "amount":"10000",  /// TELCO AMOUNT: 10.000 , 20.000, 30.000, 50.000, 100.000, 2000.000,300.000, 500.000; 1000.000(only Viettel)
+ "pin":"",  /// Pin is card number
+ "checksum":"",  /// Sha1(SECRET_KEY::PRIVATEKEY::SERIAL::PIN::AMOUNT::TYPE);
+ "type":"VIETTEL", ///Type : gateway : VIETTEL, MOBIFONE, VINAPHONE
+ "serial":"",   /// Serial: is serial
+ "SECRET_KEY":""  /// SECRET_KEY: key
+}',
+  CURLOPT_HTTPHEADER => array(
+    'Content-Type: application/json'
+  ),
+));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+echo $response;
